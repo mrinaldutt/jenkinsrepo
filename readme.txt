@@ -85,6 +85,28 @@ Pipeline: its a suite of plugin which supports implementing and integration cont
 ---------------------------------
 ---------------------------------
 
+Jenkins install: war extract and install inside tomcat deploy folder.
+install exe/
+
+start jenkins:
+F:\Tutorial\jenkins>java -jar jenkins.war --httpPort=8091
+
+Jenkins terms:
+Job/project: Refer runnable tasks that are configured in jenkins
+Node: Each machine that are part of jenkins grid(can be master or slave)
+Executor: Thread or slot for execution of jobs
+Build: Result got after executing a job
+plugin: Software that extends core functionality of jenkins
+
+
+Manager Jenkins-> Manager User : Authorization -> Matrix based sucerity: manager user permision in jenkins
+
+How to create users in jenkins?
+diff authorization and authentication in jenkins?
+used matrix base athorization to grant user acces?
+user role based strategy plugin to create roles and grant user access?
+
+
 
 
 
