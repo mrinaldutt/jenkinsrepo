@@ -105,6 +105,20 @@ How to create users in jenkins?
 diff authorization and authentication in jenkins?
 used matrix base athorization to grant user acces?
 user role based strategy plugin to create roles and grant user access?
+--------------------------------------------
+Remote access:
+crte a token: abcdefghijkl12345
+localhost:8091/job/HelloWorld/build?token=abcdefghijkl12345
+
+Access java files:
+set PATH="C:\Program Files\Java\jdk1.8.0_301\bin"
+javac -version
+cd /d F:\Tutorial\jenkins
+javac HelloWorld.java
+java HelloWorld
+
+Git:
+
 
 
 
