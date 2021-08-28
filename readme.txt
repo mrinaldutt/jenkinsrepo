@@ -118,6 +118,17 @@ javac HelloWorld.java
 java HelloWorld
 
 GIT:
+Install ngrok.
+run the batch file& fire command: ngrok http 8091
+access ngrok: http://localhost:4040/
+you can find public url for jenkins
+
+Now go to gitub repo and click on setting and find the webhook.
+Add webhook: payload url.
+
+Now go to jenkins dashboard and click on helloworld task and click configure.
+click on build trigger and click on Github hook trigger for GItScm pooling.
+
 POOL SCM | Webhooks
 Resource Intensive: Heave Operation & need to be fird requently | Not costly, no constant checking involved
 Wait for builds:Have to wat in the order of minutes for the build to happen | Instant builds(Build are triggered immediately whenever a checking happens.
