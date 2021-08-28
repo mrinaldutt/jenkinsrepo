@@ -117,8 +117,13 @@ cd /d F:\Tutorial\jenkins
 javac HelloWorld.java
 java HelloWorld
 
-Git:
+GIT:
+POOL SCM | Webhooks
+Resource Intensive: Heave Operation & need to be fird requently | Not costly, no constant checking involved
+Wait for builds:Have to wat in the order of minutes for the build to happen | Instant builds(Build are triggered immediately whenever a checking happens.
+Safer Option: Safer as jenkins is communicating to code repo | Security concern (Opening up jenkins to the outside world)
 
+If we have build cyce is very short exampe few mins, then webhook is perfet solution. If our build cycle is longer may be 30 mins and we dont need build for each and every commit then Pool SCM is suitable solution.
 
 
 
