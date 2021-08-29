@@ -136,6 +136,30 @@ Safer Option: Safer as jenkins is communicating to code repo | Security concern 
 
 If we have build cyce is very short exampe few mins, then webhook is perfet solution. If our build cycle is longer may be 30 mins and we dont need build for each and every commit then Pool SCM is suitable solution.
 
+-----------------------------MAVEN INTEGRATION----------------------------
+setup maven local repo: setting.xml
+<localRepository>C:\software\maven_repo</localRepository>
+
+
+----------Integration maven with jenkins-------------
+One way:
+Create a job for maven :
+create job named MavenJob
+select build -  Goal : clean test package
+POM: select pom path (F:\Tutorial\jenkins\jenkins_workspace\jenkins\pom.xml)
+Apply & save
+execute build now and check console output- jar created (Building jar: F:\Tutorial\jenkins\jenkins_workspace\jenkins\target\jenkins-0.0.1-SNAPSHOT.jar)
+
+Another way:
+install Maven Integration plugin
+create job and select as maven project
+select build- select root pom - pom.xml
+goal- clean test package
+advance - custom workspace - F:\Tutorial\jenkins\jenkins_workspace\jenkins (as we dont download anything from github thus tell where is the workspace)
+
+Now go to global tool configuration to tell jenkins where maven is installed:
+update maven installation path - C:\software\apache-maven-3.8.1
+------------------------------------------------------
 
 
 
