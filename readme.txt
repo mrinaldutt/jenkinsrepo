@@ -161,6 +161,37 @@ Now go to global tool configuration to tell jenkins where maven is installed:
 update maven installation path - C:\software\apache-maven-3.8.1
 ------------------------------------------------------
 
+----------------SONARQUBE----------------
+Features:
+Continuous Inspection of code
+Centralized Quality Rules
+Enforced Quaity Gate
+Dig into the issues
+DevOps integration
+Vsualize history of project
+
+Download and unzip community edition of sonarqube
+set up java path in wrapper.conf
+start sonarqube.bat
+browse - localhost:9000
+default uid/pwd - admin/admin
+
+Go to Maven project 
+add sonarqube dependency-
+<!-- https://mvnrepository.com/artifact/org.sonarsource.scanner.maven/sonar-maven-plugin -->
+		<dependency>
+			<groupId>org.sonarsource.scanner.maven</groupId>
+			<artifactId>sonar-maven-plugin</artifactId>
+			<version>3.5.0.1254</version>
+		</dependency>
+
+run - clean test sonar:sonar
+now go to localhost:9000 - check the project scan status
+
+
+
+
+
 
 
 
