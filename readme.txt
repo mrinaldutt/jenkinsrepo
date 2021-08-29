@@ -228,7 +228,34 @@ For code coverage, need to add jacoco plugin:
 		</plugins>
 	</build>
 
+---------------------INTEGRATION WITH JENKINS - SONARQUBE--------------------------
+Now go to jenins job - anothemavenjob - change the build as - clean test sonar:sonar
+Build now and check the console output - sonarqube successfully run and o/p generated
 
+------------
+Now another way - need to add plugin sonarqube in jenkins
+configure with default url - localhost:9000
+
+now go to jenins job - anothemavenjob - change the build as - clean test
+add post steps-sonarqube analysis with maven
+
+now build and check console.
+sonarqube integrated with maven sucessfully
+------------
+third way - Manager plugin - add sonarqube scanner
+install automaticaly
+
+now create a freestyle job - named- SonarQubJob
+select execute sonarqube scanner -task : scan
+Analysis properties- 
+sonar.projectKey=jenkins
+sonar.projectName=jenkins
+sonar.projectVersion=0.0.1-SNAPSHOT
+sonar.projectBaseDir=F:/Tutorial/jenkins/jenkins_workspace/jenkins
+sonar.sources=src
+sonar.java.binaries=target/classes
+
+Now build now and check console
 
 
 
