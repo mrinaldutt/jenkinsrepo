@@ -257,5 +257,22 @@ sonar.java.binaries=target/classes
 
 Now build now and check console
 
+==============================================
+--------------------------EMAIL--------------------
+Configure email: Manage Jenkins->System Configuration -> Email
+E-mail Notification - SMTP Server - smtp.gmail.com
+Default user e-mail suffix - @gmail.com
+Check Use SMTP Authentication - enter user name - awstests2020@gmail.com
+enter password- *********
+Use SSL and Use TLS 
+SMTP port - 465
+Reply-To Address - awstests2020@gmail.com
+Now check by Test configuration by sending test e-mail
 
+Now create a new freestyle job named-EmailConfigJob
+exeute a command -  di
+add post build steps - email notification - awstests2020@gmail.com
+check Send e-mail for every unstable build & Send separate e-mails to individuals who broke the build
+
+build now and check email
 
