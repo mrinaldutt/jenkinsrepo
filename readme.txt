@@ -172,7 +172,7 @@ Vsualize history of project
 
 Download and unzip community edition of sonarqube
 set up java path in wrapper.conf
-start sonarqube.bat
+start sonarqube.bat : F:\My Software\sonarqube-6.7.7\sonarqube-6.7.7\bin\windows-x86-64>StartSonar.bat
 browse - localhost:9000
 default uid/pwd - admin/admin
 
