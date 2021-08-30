@@ -276,3 +276,45 @@ check Send e-mail for every unstable build & Send separate e-mails to individual
 
 build now and check email
 
+-----------------------------------------------------
+To overcome some issue like edit subject, edit body of the messages, we need to do a different way:
+Need to ad plugin - Extended E-mail Notification
+then go to configure system - Extended E-mail Notification
+setup SMTP server - smtp.gmail.com
+SMTP port -465
+SMTP username - awstests2020@gmail.com
+password - ******
+Use SSL and TLS
+Default receients  -  awstests2020@gmail.com
+Reply to list- awstests2020@gmail.com
+We can configure default subject, default content, 
+Now configure 	Default trigger - several options like - 
+Aborted
+Always
+Before Build
+Failure - 1st
+Failure - 2nd
+Failure - Any
+Failure - Still
+Failure - X
+Failure -> Unstable (Test Failures)
+Fixed
+Not Built
+Script - After Build
+Script - Before Build
+Status Changed
+Success
+Test Improvement
+Test Regression
+Unstable (Test Failures)
+Unstable (Test Failures) - 1st
+Unstable (Test Failures) - Still
+
+Apply & save
+
+Now configure emailjob
+Post Build steps - send email for every unstable build
+here we can enter any receipent list, reply to list, content, subject, attachment. 
+
+
+=====================================
