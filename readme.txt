@@ -397,3 +397,22 @@ goal - clean test package
 advance- custom workspace -select directory
 post build - publish testng result
 select locaton of the tesng result - target\surefire-reports\
+
+==========================Integrate Tomcat for deployment====================
+Add plugin - Deploy to container plugin
+Add users for jenkind auto deployment - tomcat-users
+start tomcat
+
+create a simple web project
+
+create a maven job - tmcatdeploymentjob
+select build - maven goal - clean package
+advance - custom workspace - select the workspace
+add post build action - deploy war/war to a container 
+war - **/*war
+contextpath - nameof the app
+container -select tomcat8
+userid/pwd
+tomcat url
+
+build the job
