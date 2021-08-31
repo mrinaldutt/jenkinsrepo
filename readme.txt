@@ -317,4 +317,83 @@ Post Build steps - send email for every unstable build
 here we can enter any receipent list, reply to list, content, subject, attachment. 
 
 
-=====================================
+=====================================INTEGRATION WITH SELENIUM AND TESTG==========================
+Create a simple project and add below dependency:
+<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>3.14.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.14.3</version>
+			<scope>test</scope>
+		</dependency>
+		
+Now create a test case java file:
+package com.mrinal.training.testng;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.AssertJUnit;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+public class SampleSeleniumTest {
+	
+	WebDriver driver;
+	
+	@BeforeClass
+	public void startBrowser() {
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\mrinal\\Downloads\\chromedriver_win32\\chromedriver.exe");
+		ChromeOptions chromeOptions = new ChromeOptions();
+		chromeOptions.addArguments("--start-maximized");
+		driver = new ChromeDriver(chromeOptions);
+	}
+	
+	@Test
+	public void validateGoogleId() throws Exception {
+		System.out.println("Opening Browser");
+		driver.get("http://www.google.com");
+		System.out.println("Clicking Gmail Link");
+		Thread.sleep(5000);
+		driver.findElement(By.xpath("//*[@id=\"gbw\"]/div/div/div[1]/div[1]/a")).click();
+		System.out.println("Clicking Sign In link");
+		driver.findElement(By.xpath("/html/body/nav/div/a[2]")).click();
+		System.out.println("Entering username");
+		driver.findElement(By.xpath("//*[@id=\"identifierId\"]")).sendKeys("renju.jenkins.training");
+		System.out.println("Clicking Next button");
+		driver.findElement(By.xpath("//*[@id=\"identifierNext\"]/content/span")).click();
+		Thread.sleep(5000);
+		boolean textFound = driver.getPageSource().contains("Forgot password");
+		AssertJUnit.assertTrue(textFound);
+	}
+	
+	@AfterClass
+	public void closeBrowser() {
+		driver.quit();
+	}
+}
+
+
+Now clean test package
+Test completed
+Test report  -F:\Tutorial\jenkins\jenkins_workspace\TestNG\target\surefire-reports
+files: emailable-report.html
+testng-results
+
+Now go to jenkins
+add plugin - TestNg
+Now create a maven job named TestNGSeleniumJob
+goto build -select the pom.xml location
+goal - clean test package
+advance- custom workspace -select directory
+post build - publish testng result
+select locaton of the tesng result - target\surefire-reports\
