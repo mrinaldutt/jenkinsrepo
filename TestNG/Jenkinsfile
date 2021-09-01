@@ -1,27 +1,26 @@
 pipeline{ 
-  agent any
-  stages{
-    stage("Cleaning Stage") { 
-        steps{
-		       dir('TestNG'){
-			       bat "mvn clean"
-		       }
-	      }
-    }
-    stage("Testing Stage") { 
-       steps{
-		        dir('TestNG'){
-				bat "mvn test"
+  agent any  
+  stage("Parallel Execution") {
+			steps {
+				parallel(
+				      a: {
+					dir('TestNG'){
+			       			bat "mvn clean"
+		       			}
+				      },
+				      b: {
+					dir('TestNG'){
+						bat "mvn test"
+					}
+				      },
+				      c: {
+					dir('TestNG'){
+					bat "mvn package"
+					}
+				      }
+				)
 			}
-	    }
-    }
-    stage("Packaging Stage") { 
-       steps{
-		       dir('TestNG'){
-			       bat "mvn package"
-		       }
-	    }
-    }
+		}  
     stage("Consolidate Results") {
 			steps {
 				input ("Do you want to capture results?")
