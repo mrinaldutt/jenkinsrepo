@@ -3,17 +3,23 @@ pipeline{
   stages{
     stage("Cleaning Stage") { 
         steps{
-		      bat "mvn clean"
+		       dir('TestNG'){
+			       bat "mvn clean"
+		       }
 	      }
     }
     stage("Testing Stage") { 
        steps{
-		       bat "mvn test"
+		        dir('TestNG'){
+				bat "mvn test"
+			}
 	    }
     }
     stage("Packaging Stage") { 
        steps{
-		      bat "mvn package"
+		       dir('TestNG'){
+			       bat "mvn package"
+		       }
 	    }
     }
   }
