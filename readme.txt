@@ -416,3 +416,77 @@ userid/pwd
 tomcat url
 
 build the job
+===============================================================================
+===============================================================================
+---------------Concept of Pipeline-------------
+Pipeline - containes of pipes/jobs . each has own purpose.
+Suppose - a job which gets the latest code from Git. 
+A job which building the code and packing it as a deployable pipe.
+A job which takes care of testing.
+A job takes care of deploying it into server.
+So all these jobs connects each other and forms pipelines that we achive continous delivery.
+The code transfer to deployment is automated process, hence the keyword continuous.
+
+Deliver Pipeline
+Jenkins pipeline
+Multi-branch pipeline
+
+------------------------------------------------
+Setting up delivery pipeline
+Create three job - Build, Deploy, test
+Now create delivery pipeline view - install delivery pipeline
+Click on new view - select delivery pipeline view
+View Name- DelPipeLineView
+select all default setting
+Pipeline - add -Select initial job - name and select Build job
+
+Now build the initial job - build job
+Now all three job are showing in DelPipelineview
+
+Some more option - edit view:
+Enable start of new pipeline build - this check box allows us to trigger build from pipeline view screen
+Enable rebuild - it will gives us to rebuild one of the job.
+
+---------------------------------------------------------------------
+Setting up Build Pipeline
+Install Build pipeline plugin
+
+Its a better way to check logs, each and every job
+some shortcut - run, add job, delete job , manager plugin
+----------------------------------------------------------------------
+Jenkins Pipeline
+When we setup a large complex project delivery and build pipeline is not a good option, thus jenkins pipeline comes.
+It is a suite of jenkins features, installed as plugins, which enable implementation of continuous delivery pipelines which are the automated processes for getting softeare from source control deployment to end users.
+
+Supports building continous Delivery pipeline through either a web UI or scripted jenkins file. These are codeed in the groovy DSL.
+2 ways of coding a jenkins pipeline - Declarative is a recent feature and very powerful.
+
+Key features - Code your pipeline
+Durability
+Handles User input
+Parallel Job execution
+Complex Pipelines Possible
+
+Diff declarative Pipeline VS Scripted Pipeline
+Declarative: Recent features in jenkins and uses a simpler groovy syntax
+Code written locally in a file & is checked in to the SCM.
+Code is written within a pipeline block
+
+Scripted: Traditional way writing jenkins pipeline with a stricter groovy syntax.
+Code is written directly on the jenkins instance.
+Code is written within a node block.
+
+Pipeline concept:
+Step: A Step refers to the single task that has to performed within a stage.
+Stage: A stage block defines a conceptually distinct subset of tasks.
+Pipeline: A Pipeline is a user defined model of a CD pipeline.
+Node: A Node is a machine which is a part of jenkins environment.
+
+
+
+
+
+
+
+
+
