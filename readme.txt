@@ -483,6 +483,177 @@ Pipeline: A Pipeline is a user defined model of a CD pipeline.
 Node: A Node is a machine which is a part of jenkins environment.
 
 
+------------------------------------------------------------------------------------------------
+
+Create Scripted jenkins pipelin:
+node {  
+    stage('Build') { 
+        echo "Inside the build stage" 
+    }
+    stage('Test') { 
+       ech "Inside the Test stage" 
+    }
+    stage('Deploy') { 
+       echo "Inside the deploy Stage"
+    }
+}
+
+https://github.com/mrinaldutt/jenkinsrepo.git
+
+node {
+    stage('Preparation') { // for display purposes
+        // Get some code from a GitHub repository
+        git branch: 'main', url:'https://github.com/mrinaldutt/jenkinsrepo.git'
+    }
+    stage('Build') {
+        // Run the maven build
+        dir('TestNG'){
+            
+            bat "mvn clean test"
+        }
+    }
+    stage('Package') {
+        // Run the maven pcakgae
+        dir('TestNG'){
+                bat "mvn package"
+        }
+    }
+    stage('Results') {
+        junit '**/target/surefire-reports/TEST-*.xml'
+        archiveArtifacts 'TestNG/target/*.jar'
+    }
+}
+
+
+
+-----------------------------
+Declarative Pipeline
+Jenkinsfile:
+pipeline{ 
+  agent any
+  stages{
+    stage("Cleaning Stage") { 
+        steps{
+		       dir('TestNG'){
+			       bat "mvn clean"
+		       }
+	      }
+    }
+    stage("Testing Stage") { 
+       steps{
+		        dir('TestNG'){
+				bat "mvn test"
+			}
+	    }
+    }
+    stage("Packaging Stage") { 
+       steps{
+		       dir('TestNG'){
+			       bat "mvn package"
+		       }
+	    }
+    }
+  }
+}
+
+-------------------------
+takes user input/prompt in declaraive pipeline:
+add below stage:
+stage("Consolidate Results") {
+			steps {
+				input ("Do you want to capture results?")
+				junit '**/target/surefire-reports/TEST-*.xml'
+				archive 'TestNG/target/*.jar'
+			}
+		}
+-------------------------
+adding email:
+stage("Email Build Status"){
+			steps {
+				mail body: "${env.JOB_NAME}  - Build # ${env.BUILD_NUMBER}  - ${currentBuild.currentResult} \n\nCheck console output at ${env.BUILD_URL} to view the results.", subject: "${env.JOB_NAME}  - Build # ${env.BUILD_NUMBER}  - ${currentBuild.currentResult}!!", to: 'awstests2020@gmail.com'
+			}
+		}
+
+Complete Jenkinsfile:
+pipeline{ 
+  agent any
+  stages{
+    stage("Cleaning Stage") { 
+        steps{
+		       dir('TestNG'){
+			       bat "mvn clean"
+		       }
+	      }
+    }
+    stage("Testing Stage") { 
+       steps{
+		        dir('TestNG'){
+				bat "mvn test"
+			}
+	    }
+    }
+    stage("Packaging Stage") { 
+       steps{
+		       dir('TestNG'){
+			       bat "mvn package"
+		       }
+	    }
+    }
+    stage("Consolidate Results") {
+			steps {
+				input ("Do you want to capture results?")
+				junit '**/target/surefire-reports/TEST-*.xml'
+				archive 'TestNG/target/*.jar'
+			}
+		}
+    stage("Email Build Status"){
+			steps {
+				mail body: "${env.JOB_NAME}  - Build # ${env.BUILD_NUMBER}  - ${currentBuild.currentResult} \n\nCheck console output at ${env.BUILD_URL} to view the results.", subject: "${env.JOB_NAME}  - Build # ${env.BUILD_NUMBER}  - ${currentBuild.currentResult}!!", to: 'awstests2020@gmail.com'
+			}
+		}	  
+  }
+}
+-------------------------
+Submit Stages in parallel:
+pipeline{ 
+  agent any  
+  stage("Parallel Execution") {
+			steps {
+				parallel(
+				      a: {
+					dir('TestNG'){
+			       			bat "mvn clean"
+		       			}
+				      },
+				      b: {
+					dir('TestNG'){
+						bat "mvn test"
+					}
+				      },
+				      c: {
+					dir('TestNG'){
+					bat "mvn package"
+					}
+				      }
+				)
+			}
+		}  
+    stage("Consolidate Results") {
+			steps {
+				input ("Do you want to capture results?")
+				junit '**/target/surefire-reports/TEST-*.xml'
+				archive 'TestNG/target/*.jar'
+			}
+		}
+    stage("Email Build Status"){
+			steps {
+				mail body: "${env.JOB_NAME}  - Build # ${env.BUILD_NUMBER}  - ${currentBuild.currentResult} \n\nCheck console output at ${env.BUILD_URL} to view the results.", subject: "${env.JOB_NAME}  - Build # ${env.BUILD_NUMBER}  - ${currentBuild.currentResult}!!", to: 'awstests2020@gmail.com'
+			}
+		}	  
+  }
+}
+
+
 
 
 
