@@ -416,3 +416,64 @@ userid/pwd
 tomcat url
 
 build the job
+--------------------------------------------------------------------------
+=========================Pipeline===========================
+Jenkinsfile (Declarative Pipeline): No code 
+pipeline {
+	agent any 
+	
+	environment{
+		secret = credential('TEST')
+	}
+	stages {
+		stage('example stage') {
+			steps {
+				sh 'echo $secret'			
+				}	
+			}
+		stage('Build') {
+			steps {
+				
+				}	
+			}
+		stage('Test'){
+			steps {
+				
+				}
+			}
+		stage('Deploy') {
+			steps {
+				retry(3){
+					 echo 'I am not going to work :c'	
+					}
+				
+				timeout(time:3, unit: 'SECONDS') {
+					sh 'sleep 5'
+				}
+			
+				}
+			}
+		stage('Timeout') {
+			steps {
+				retry(3){
+					  echo 'I am not going to work :c'	
+					}
+			
+				}
+			}	
+		}
+	}	
+
+Scripted Pipeline: written code using groovy or java
+node {  
+    stage('Build') { 
+        echo "Inside the build stage" 
+    }
+    stage('Test') { 
+       echo "Inside the Test stage" 
+    }
+    stage('Deploy') { 
+       echo "Inside the deploy Stage"
+    }
+}
+
